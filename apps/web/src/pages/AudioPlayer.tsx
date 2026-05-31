@@ -128,18 +128,27 @@ export default function AudioPlayer() {
 
   return (
     <div className="player-screen">
-      <button
-        type="button"
-        className="player-back"
-        onClick={() => navigate(-1)}
-        aria-label="Back to map"
-      >
-        ‹
-      </button>
+      <header className="player-header">
+        <button type="button" className="player-back" onClick={() => navigate(-1)} aria-label="Back">
+          <span aria-hidden="true">←</span>
+        </button>
+        <div className="player-header-text">
+          <div className="player-header-kicker">Now playing</div>
+          <div className="player-header-title">Tour Cheetah London</div>
+        </div>
+        <div className="player-header-spacer" />
+      </header>
 
-      <img src={stop.photoSrc} alt={stop.displayTitle} className="player-photo" />
+      <div className="player-hero">
+        <div className="player-art">
+          <img src={stop.photoSrc} alt={stop.displayTitle} className="player-photo" />
+        </div>
 
-      <h1 className="player-title">{stop.displayTitle}</h1>
+        <div className="player-meta">
+          <h1 className="player-title">{stop.displayTitle}</h1>
+          <div className="player-artist">Tour Cheetah London</div>
+        </div>
+      </div>
 
       <audio
         ref={audioRef}
@@ -185,7 +194,7 @@ export default function AudioPlayer() {
           onClick={cycleSpeed}
           aria-label={`Change speed (currently ${speed.label})`}
         >
-          <img src={speed.src} alt="" />
+          <span className="player-speed" aria-hidden="true">{SPEEDS[speedIdx].rate}x</span>
         </button>
       </div>
 
