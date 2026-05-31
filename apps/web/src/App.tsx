@@ -16,6 +16,7 @@ function useScrollLock() {
   const location = useLocation();
   useEffect(() => {
     document.body.setAttribute('data-route', location.pathname);
+    document.documentElement.setAttribute('data-route', location.pathname);
   }, [location]);
 }
 
