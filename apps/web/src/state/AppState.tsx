@@ -16,6 +16,7 @@ interface AppState {
 const AppStateContext = createContext<AppState | null>(null);
 
 const COMPLETED_KEY = 'tourcheetah:completed-stops';
+const TOKEN_KEY = 'tourcheetah:access-token';
 
 function loadCompleted(): Record<string, boolean> {
   try {
@@ -26,11 +27,30 @@ function loadCompleted(): Record<string, boolean> {
   }
 }
 
+function loadToken(): string | null {
+  try {
+    const raw = window.localStorage.getItem(TOKEN_KEY);
+    return raw || null;
+  } catch {
+    return null;
+  }
+}
+
 export function AppStateProvider({ children }: { children: ReactNode }) {
   const [completedStops, setCompletedStops] = useState<Record<string, boolean>>(() => loadCompleted());
   const [showBikeStops, setShowBikeStops] = useState(false);
   const [nowPlayingId, setNowPlayingId] = useState<string | null>(null);
-  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [accessToken, setAccessTokenState] = useState<string | null>(() => loadToken());
+
+  const setAccessToken = useCallback((token: string | null) => {
+    setAccessTokenState(token);
+    try {
+      if (token) window.localStorage.setItem(TOKEN_KEY, token);
+      else window.localStorage.removeItem(TOKEN_KEY);
+    } catch {
+      // ignore
+    }
+  }, []);
 
   const markCompleted = useCallback((stopId: string) => {
     setCompletedStops((prev) => {
