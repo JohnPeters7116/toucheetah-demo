@@ -34,6 +34,8 @@ jobs:
 
       - name: Build
         run: npm --workspace apps/web run build
+        env:
+          VITE_DISABLE_AUTH: "true"
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
