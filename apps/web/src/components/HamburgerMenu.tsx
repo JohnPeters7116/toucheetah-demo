@@ -31,6 +31,7 @@ export default function HamburgerMenu({ open, onClose }: Props) {
         </nav>
         <div className="menu-footer">
           <span>Tour Cheetah London</span>
+          <span className="menu-footer-attr">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="menu-footer-link">OpenStreetMap</a> contributors</span>
         </div>
       </aside>
     </>

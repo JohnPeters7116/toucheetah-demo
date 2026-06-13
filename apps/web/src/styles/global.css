@@ -244,6 +244,12 @@ img {
   height: 28px;
 }
 
+/* Hide MapLibre attribution bubble and logo — attribution kept in hamburger menu */
+.maplibregl-ctrl-attrib,
+.maplibregl-ctrl-logo {
+  display: none !important;
+}
+
 .maplibregl-popup-content {
   font-size: 13px;
   font-family: inherit;
@@ -393,7 +399,13 @@ img {
   padding: 16px 24px;
   font-size: 12px;
   color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
+.menu-footer-attr { font-size: 11px; }
+.menu-footer-link { color: var(--accent); text-decoration: none; }
+.menu-footer-link:hover { text-decoration: underline; }
 
 /* === Audio player === */
 .player-screen {
